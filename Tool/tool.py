@@ -235,9 +235,9 @@ def predict_bug(model=best_model, tfidf=tfidf):
     print (" ")
     match predict:
         case 1:
-            print ("Bug Report is Performance Related. {}".format(confidence))
+            print ("Bug Report is Performance Related. Confidence: {}".format(confidence))
         case 0:
-            print ("Bug Report is not Performance Related. {}".format(confidence))
+            print ("Bug Report is not Performance Related. Confidence: {}".format(confidence))
 
 def predict(input_file,model=best_model, tfidf=tfidf):
     file = pd.read_csv("{}.csv".format(input_file))
@@ -262,8 +262,10 @@ def predict(input_file,model=best_model, tfidf=tfidf):
     vectors = tfidf.transform(data["text"])
 
     predictions = model.predict(vectors)
+    confidences = model.decision_function(vectors)
     original["predicted class"] = predictions
     original["label"] = original["predicted class"].apply(label_conversion)
+    original["confidence"] = confidences
     original.to_csv("{}_predictions.csv".format(input_file))
 
     print ("Saved to {}_predictions.csv.".format(input_file))    
