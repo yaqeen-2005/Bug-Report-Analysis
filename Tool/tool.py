@@ -218,7 +218,7 @@ print(f"Average AUC:           {final_auc:.4f}")
 
 
 
-def pred_bug(model=best_model, tfidf=tfidf):
+def predict_bug(model=best_model, tfidf=tfidf):
     string = input("Bug report text here:")
     
     string = remove_html(string)
