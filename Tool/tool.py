@@ -216,27 +216,6 @@ print(f"Average Recall:        {final_recall:.4f}")
 print(f"Average F1 score:      {final_f1:.4f}")
 print(f"Average AUC:           {final_auc:.4f}")
 
-# Save final results to CSV (append mode)
-try:
-    # Attempt to check if the file already has a header
-    existing_data = pd.read_csv(out_csv_name, nrows=1)
-    header_needed = False
-except:
-    header_needed = True
-
-df_log = pd.DataFrame(
-    {
-        'repeated_times': [REPEAT],
-        'Accuracy': [final_accuracy],
-        'Precision': [final_precision],
-        'Recall': [final_recall],
-        'F1': [final_f1],
-        'AUC': [final_auc],
-        'CV_list(AUC)': [str(auc_values)]
-    }
-)
-
-df_log.to_csv(out_csv_name, mode='a', header=header_needed, index=False)
 
 
 def pred_bug(model=best_model, tfidf=tfidf):
