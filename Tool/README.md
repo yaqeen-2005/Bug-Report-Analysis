@@ -8,3 +8,4 @@ scikit-learn
 nltk
 scipy
 ```
+See Manual.pdf for further instruction
